@@ -17,8 +17,23 @@ int main( int argc, char *argv[] )
     char start[MAX_TIMESTAMP];
     char end[MAX_TIMESTAMP];
 
+    
+    get_extension(extension, filepath);
 
-    generate_ffmpeg_mkv_command(do_this_command, start, end, filepath);
+    if (strcmp("mkv", extension) == 0) 
+    {
+        generate_ffmpeg_mkv_command(do_this_command, start, end, filepath);
+    }
+    else if (strcmp("mp4", extension) == 0)
+    {
+        generate_ffmpeg_mp4_command(do_this_command, start, end, filepath);
+    } 
+    else 
+    {
+        printf("File extension not supported: %s\n\n", extension);
+        return 1;
+    }
+
     printf("command:\n%s\n\n", do_this_command);
 
 	return 0;
